@@ -1,0 +1,1388 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>マトメル｜ホットペッパー・EPARK・電話予約の売上、まるっと一画面で。</title>
+<meta name="description" content="ホットペッパー、EPARK、電話予約、LINE…バラバラの売上を一つのダッシュボードに。整体院・美容室・ネイル・エステの売上集計を月3時間→5分に。月額¥10,000で今すぐ始められます。">
+<meta name="keywords" content="売上管理,ダッシュボード,整体院,美容室,ネイルサロン,エステサロン,ホットペッパービューティ,EPARK,売上集計,予約管理">
+<meta name="author" content="ヒロコーポレーション">
+<meta name="theme-color" content="#1a6fb5">
+<!-- OGP -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://matomeru.app/">
+<meta property="og:title" content="マトメル｜バラバラの売上を、一画面に。">
+<meta property="og:description" content="ホットペッパー、EPARK、電話予約、LINE…複数チャネルの売上をAIが自動分類。月末の集計作業を3時間→5分に短縮する売上統合ダッシュボード。">
+<meta property="og:image" content="https://matomeru.app/images/ogp.png">
+<meta property="og:site_name" content="マトメル">
+<meta property="og:locale" content="ja_JP">
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="マトメル｜バラバラの売上を、一画面に。">
+<meta name="twitter:description" content="ホットペッパー、EPARK、電話予約、LINE…複数チャネルの売上をAIが自動分類。月末の集計作業を3時間→5分に短縮。">
+<meta name="twitter:image" content="https://matomeru.app/images/ogp.png">
+<!-- Favicon -->
+<link rel="icon" href="images/favicon.ico" sizes="any">
+<link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+<!-- Canonical -->
+<link rel="canonical" href="https://matomeru.app/">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Zen+Maru+Gothic:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #1a6fb5;
+    --primary-dark: #124d7e;
+    --primary-light: #e8f2fb;
+    --accent: #ff6b35;
+    --accent-light: #fff3ed;
+    --text: #2a2a2a;
+    --text-light: #6b7280;
+    --bg: #fafcfe;
+    --bg-warm: #f5f0eb;
+    --white: #ffffff;
+    --border: #e5e7eb;
+    --shadow: 0 4px 24px rgba(0,0,0,0.06);
+    --shadow-lg: 0 12px 48px rgba(0,0,0,0.1);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    color: var(--text);
+    background: var(--bg);
+    line-height: 1.8;
+    -webkit-font-smoothing: antialiased;
+  }
+  /* ===== HEADER ===== */
+  header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .logo {
+    font-family: 'Zen Maru Gothic', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: var(--primary);
+    letter-spacing: -0.02em;
+  }
+  .logo-sub {
+    font-size: 0.65rem;
+    color: var(--text-light);
+    font-weight: 500;
+    display: block;
+    margin-top: -4px;
+    letter-spacing: 0.05em;
+  }
+  .header-cta {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-decoration: none;
+  }
+  .header-cta:hover { background: var(--primary-dark); transform: translateY(-1px); }
+  /* ===== HERO ===== */
+  .hero {
+    padding: 120px 20px 60px;
+    text-align: center;
+    background: linear-gradient(180deg, var(--primary-light) 0%, var(--bg) 100%);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(ellipse at 30% 20%, rgba(26,111,181,0.06) 0%, transparent 50%),
+                radial-gradient(ellipse at 70% 80%, rgba(255,107,53,0.04) 0%, transparent 50%);
+    pointer-events: none;
+  }
+  .hero-tag {
+    display: inline-block;
+    background: var(--white);
+    border: 1.5px solid var(--primary);
+    color: var(--primary);
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 6px 20px;
+    border-radius: 50px;
+    margin-bottom: 24px;
+    position: relative;
+    animation: fadeInDown 0.6s ease-out;
+  }
+  .hero h1 {
+    font-family: 'Zen Maru Gothic', sans-serif;
+    font-size: 1.75rem;
+    font-weight: 900;
+    line-height: 1.5;
+    margin-bottom: 12px;
+    position: relative;
+    animation: fadeInUp 0.6s ease-out 0.1s both;
+  }
+  .hero h1 .highlight {
+    background: linear-gradient(transparent 60%, #fde68a 60%);
+    padding: 0 4px;
+  }
+  .hero-sub {
+    font-size: 0.95rem;
+    color: var(--text-light);
+    margin-bottom: 36px;
+    line-height: 1.9;
+    animation: fadeInUp 0.6s ease-out 0.2s both;
+  }
+  .hero-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+    animation: fadeInUp 0.6s ease-out 0.3s both;
+  }
+  .btn-primary {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 16px 40px;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    box-shadow: 0 4px 16px rgba(26,111,181,0.3);
+  }
+  .btn-primary:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(26,111,181,0.4);
+  }
+  .btn-secondary {
+    background: transparent;
+    color: var(--primary);
+    border: 2px solid var(--primary);
+    padding: 14px 40px;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-decoration: none;
+  }
+  .btn-secondary:hover {
+    background: var(--primary-light);
+  }
+  /* ===== PAIN POINTS ===== */
+  .pain {
+    padding: 60px 20px;
+    background: var(--bg-warm);
+  }
+  .pain h2 {
+    font-family: 'Zen Maru Gothic', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 900;
+    text-align: center;
+    margin-bottom: 32px;
+    line-height: 1.6;
+  }
+  .pain-list {
+    max-width: 500px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .pain-item {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 24px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    box-shadow: var(--shadow);
+    transition: transform 0.3s;
+  }
+  .pain-item:hover { transform: translateY(-2px); }
+  .pain-icon {
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    background: var(--primary-light);
+    border-radius: 50%;
+    padding: 14px;
+  }
+  .pain-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+  .pain-text {
+    font-size: 0.95rem;
+    font-weight: 500;
+    line-height: 1.7;
+  }
+  .pain-text strong {
+    color: var(--accent);
+  }
+  /* ===== SOLUTION ===== */
+  .solution {
+    padding: 60px 20px;
+    text-align: center;
+  }
+  .solution-tag {
+    display: inline-block;
+    background: var(--primary-light);
+    color: var(--primary);
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 6px 20px;
+    border-radius: 50px;
+    margin-bottom: 20px;
+  }
+  .solution h2 {
+    font-family: 'Zen Maru Gothic', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 900;
+    margin-bottom: 16px;
+    line-height: 1.5;
+  }
+  .solution-desc {
+    font-size: 0.95rem;
+    color: var(--text-light);
+    margin-bottom: 40px;
+    line-height: 1.9;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  /* Dashboard Preview */
+  .dashboard-preview {
+    background: var(--white);
+    border-radius: 20px;
+    box-shadow: var(--shadow-lg);
+    padding: 24px;
+    max-width: 500px;
+    margin: 0 auto 20px;
+    border: 1px solid var(--border);
+  }
+  .dash-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  .dash-title {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--text-light);
+  }
+  .dash-period {
+    font-size: 0.75rem;
+    background: var(--primary-light);
+    color: var(--primary);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-weight: 600;
+  }
+  .dash-total {
+    text-align: left;
+    margin-bottom: 24px;
+  }
+  .dash-total-label {
+    font-size: 0.75rem;
+    color: var(--text-light);
+    margin-bottom: 4px;
+  }
+  .dash-total-number {
+    font-family: 'Zen Maru Gothic', sans-serif;
+    font-size: 2.2rem;
+    font-weight: 900;
+    color: var(--primary);
+  }
+  .dash-total-change {
+    font-size: 0.8rem;
+    color: #10b981;
+    font-weight: 700;
+  }
+  .dash-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .dash-bar-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .dash-bar-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    width: 100px;
+    text-align: left;
+    flex-shrink: 0;
+  }
+  .dash-bar-track {
+    flex: 1;
+    height: 28px;
+    background: #f3f4f6;
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+  }
+  .dash-bar-fill {
+    height: 100%;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 8px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: white;
+    transition: width 1.5s ease-out;
+  }
+  .bar-hp { background: linear-gradient(90deg, #ff6b35, #ff8f65); width: 75%; }
+  .bar-epark { background: linear-gradient(90deg, #1a6fb5, #4a9fd8); width: 45%; }
+  .bar-tel { background: linear-gradient(90deg, #10b981, #34d399); width: 30%; }
+  .bar-line { background: linear-gradient(90deg, #8b5cf6, #a78bfa); width: 20%; }
+  .dash-bar-amount {
+    font-size: 0.75rem;
+    font-weight: 700;
+    width: 80px;
+    text-align: right;
+    flex-shrink: 0;
+  }
+  /* ===== STEPS ===== */
+  .steps {
+    padding: 60px 20px;
+    background: var(--primary-light);
+  }
+  .steps-tag {
+    display: inline-block;
+    background: var(--white);
+    color: var(--primary);
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 6px 20px;
+    border-radius: 50px;
+    margin-bottom: 20px;
+  }
+  .steps h2 {
+    font-family: 'Zen Maru Gothic', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 900;
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  .step-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  .step-card {
+    background: var(--white);
+    border-radius: 20px;
+    padding: 32px 24px;
+    box-shadow: var(--shadow);
+    position: relative;
+  }
+  .step-number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background: var(--primary);
+    color: white;
+    border-radius: 50%;
+    font-size: 0.85rem;
+    font-weight: 900;
+    margin-bottom: 16px;
+  }
+  .step-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--primary);
+    letter-spacing: 0.1em;
+    margin-bottom: 8px;
+  }
+  .step-card h3 {
+    font-family: 'Zen Maru Gothic', sans-serif;
+    font-size: 1.15rem;
+    font-weight: 900;
+    margin-bottom: 12px;
+    line-height: 1.5;
+  }
+  .step-card p {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    line-height: 1.8;
+  }
+  .step-emoji {
+    font-size: 2.5rem;
+    margin-bottom: 12px;
+  }
+  .step-img {
+    width: 100%;
+    max-width: 280px;
+    height: auto;
+    border-radius: 12px;
+    margin-bottom: 16px;
+  }
+  /* ===== HERO VIDEO ===== */
+  .hero-video {
+    max-width: 640px;
+    width: 100%;
+    margin: 36px auto 0;
+    animation: fadeInUp 0.6s ease-out 0.4s both;
+  }
+  .video-wrapper {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    border-radius: 16px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.1);
+  }
+  .video-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  /* ===== COMPARISON IMAGES ===== */
+  .compare-images {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    max-width: 500px;
+    margin: 0 auto 40px;
+  }
+  .compare-img-card {
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+  }
+  .compare-img-card img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  @media (min-width: 768px) {
+    .compare-images {
+      flex-direction: row;
+      max-width: 700px;
+    }
+    .compare-img-card {
+      flex: 1;
+    }
+  }
+  /* ===== TARGET IMAGES ===== */
+  .target-img {
+    width: 64px;
+    height: 64px;
+    object-fit: contain;
+    margin-bottom: 8px;
+  }
+  /* ===== HEADER LOGO IMAGE ===== */
+  .logo-img {
+    height: 44px;
+    width: auto;
+    mix-blend-mode: multiply;
+  }
+  /* ===== COMPARISON ===== */
+  .comparison {
+    padding: 60px 20px;
+  }
+  .comparison h2 {
+    font-family: 'Zen Maru Gothic', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 900;
+    text-align: center;
+    margin-bottom: 32px;
+    line-height: 1.6;
+  }
+  .compare-table {
+    max-width: 500px;
+    margin: 0 auto;
+    background: var(--white);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+  }
+  .compare-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    border-bottom: 1px solid var(--border);
+  }
+  .compare-row:last-child { border-bottom: none; }
+  .compare-cell {
+    padding: 16px 12px;
+    font-size: 0.8rem;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .compare-header {
+    background: var(--primary);
+    color: white;
+    font-weight: 700;
+    font-size: 0.75rem;
+  }
+  .compare-header.matomeru {
+    background: var(--accent);
+  }
+  .compare-label {
+    background: #f9fafb;
+    font-weight: 700;
+    font-size: 0.75rem;
+    color: var(--text);
+    justify-content: flex-start;
+    padding-left: 16px;
+  }
+  .compare-good { color: var(--primary); font-weight: 700; }
+  .compare-bad { color: #d1d5db; }
+  /* ===== PRICING ===== */
+  .pricing {
+    padding: 60px 20px;
+    background: var(--bg-warm);
+    text-align: center;
+  }
+  .pricing h2 {
+    font-family: 'Zen Maru Gothic', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 900;
+    margin-bottom: 12px;
+  }
+  .pricing-sub {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    margin-bottom: 32px;
+  }
+  .price-card {
+    background: var(--white);
+    border-radius: 24px;
+    padding: 40px 28px;
+    max-width: 400px;
+    margin: 0 auto;
+    box-shadow: var(--shadow-lg);
+    border: 2px solid var(--primary);
+    position: relative;
+  }
+  .price-badge {
+    position: absolute;
+    top: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--accent);
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 6px 24px;
+    border-radius: 50px;
+  }
+  .price-name {
+    font-family: 'Zen Maru Gothic', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 900;
+    color: var(--primary);
+    margin-bottom: 8px;
+  }
+  .price-amount {
+    font-family: 'Zen Maru Gothic', sans-serif;
+    font-size: 3rem;
+    font-weight: 900;
+    color: var(--text);
+    line-height: 1;
+  }
+  .price-amount span {
+    font-size: 1rem;
+    font-weight: 500;
+  }
+  .price-period {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    margin-bottom: 8px;
+  }
+  .price-annual {
+    font-size: 0.85rem;
+    color: var(--primary);
+    font-weight: 700;
+    margin-bottom: 24px;
+    background: var(--primary-light);
+    display: inline-block;
+    padding: 6px 16px;
+    border-radius: 50px;
+  }
+  .price-features {
+    text-align: left;
+    margin-bottom: 28px;
+  }
+  .price-feature {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 0;
+    font-size: 0.9rem;
+  }
+  .price-feature .check {
+    color: var(--primary);
+    font-weight: 900;
+    font-size: 1.1rem;
+  }
+  /* ===== TARGET ===== */
+  .target {
+    padding: 60px 20px;
+    text-align: center;
+  }
+  .target h2 {
+    font-family: 'Zen Maru Gothic', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 900;
+    margin-bottom: 32px;
+    line-height: 1.6;
+  }
+  .target-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  .target-item {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 24px 16px;
+    box-shadow: var(--shadow);
+    text-align: center;
+  }
+  .target-emoji {
+    font-size: 2rem;
+    margin-bottom: 8px;
+  }
+  .target-name {
+    font-size: 0.85rem;
+    font-weight: 700;
+  }
+  /* ===== CTA ===== */
+  .cta {
+    padding: 60px 20px;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    text-align: center;
+    color: white;
+  }
+  .cta h2 {
+    font-family: 'Zen Maru Gothic', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 900;
+    margin-bottom: 12px;
+    line-height: 1.5;
+  }
+  .cta p {
+    font-size: 0.9rem;
+    opacity: 0.9;
+    margin-bottom: 32px;
+  }
+  .btn-cta {
+    background: white;
+    color: var(--primary);
+    border: none;
+    padding: 18px 48px;
+    border-radius: 50px;
+    font-size: 1.05rem;
+    font-weight: 900;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.2);
+  }
+  .btn-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+  }
+  .cta-note {
+    font-size: 0.8rem;
+    opacity: 0.7;
+    margin-top: 16px;
+  }
+  /* ===== CROSS-SELL ===== */
+  .cross-sell {
+    padding: 48px 20px;
+    background: var(--bg-warm);
+    text-align: center;
+  }
+  .cross-sell-card {
+    background: var(--white);
+    border-radius: 20px;
+    padding: 32px 24px;
+    max-width: 500px;
+    margin: 0 auto;
+    box-shadow: var(--shadow);
+    border-left: 4px solid #4a7c59;
+  }
+  .cross-sell-card h3 {
+    font-family: 'Zen Maru Gothic', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 900;
+    margin-bottom: 12px;
+    color: #4a7c59;
+  }
+  .cross-sell-card p {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    margin-bottom: 20px;
+    line-height: 1.8;
+  }
+  .btn-matakite {
+    background: #4a7c59;
+    color: white;
+    border: none;
+    padding: 12px 32px;
+    border-radius: 50px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s;
+    display: inline-block;
+  }
+  .btn-matakite:hover { background: #3d6749; }
+  /* ===== CONTACT FORM ===== */
+  .contact-form {
+    padding: 60px 20px;
+    background: var(--bg);
+    text-align: center;
+  }
+  .contact-form h2 {
+    font-family: 'Zen Maru Gothic', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 900;
+    margin-bottom: 8px;
+    line-height: 1.6;
+  }
+  .contact-form-sub {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    margin-bottom: 32px;
+  }
+  .contact-form-card {
+    background: var(--white);
+    border-radius: 20px;
+    padding: 32px 24px;
+    max-width: 500px;
+    margin: 0 auto;
+    box-shadow: var(--shadow);
+    text-align: left;
+  }
+  .form-group {
+    margin-bottom: 20px;
+  }
+  .form-group label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 700;
+    margin-bottom: 6px;
+    color: var(--text);
+  }
+  .form-group .required {
+    color: #ef4444;
+    font-size: 0.75rem;
+  }
+  .form-group .optional {
+    color: var(--text-light);
+    font-size: 0.75rem;
+    font-weight: 400;
+  }
+  .form-group input,
+  .form-group textarea {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1.5px solid var(--border);
+    border-radius: 12px;
+    font-size: 0.9rem;
+    font-family: 'Noto Sans JP', sans-serif;
+    color: var(--text);
+    background: var(--bg);
+    transition: border-color 0.3s, box-shadow 0.3s;
+    outline: none;
+  }
+  .form-group input:focus,
+  .form-group textarea:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(26,111,181,0.1);
+  }
+  .form-group input::placeholder,
+  .form-group textarea::placeholder {
+    color: #c0c5cc;
+  }
+  .form-group textarea {
+    resize: vertical;
+    min-height: 80px;
+  }
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .form-error {
+    color: #ef4444;
+    font-size: 0.8rem;
+    text-align: center;
+    margin-bottom: 12px;
+    background: #fef2f2;
+    padding: 8px;
+    border-radius: 8px;
+    display: none;
+  }
+  .form-error.show {
+    display: block;
+  }
+  .btn-submit {
+    width: 100%;
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 16px;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 700;
+    font-family: 'Noto Sans JP', sans-serif;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-shadow: 0 4px 16px rgba(26,111,181,0.3);
+  }
+  .btn-submit:hover {
+    background: var(--primary-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 24px rgba(26,111,181,0.4);
+  }
+  .btn-submit:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+  }
+  .form-note {
+    font-size: 0.75rem;
+    color: var(--text-light);
+    text-align: center;
+    margin-top: 12px;
+  }
+  .form-success {
+    text-align: center;
+    padding: 32px 16px;
+  }
+  .form-success-icon {
+    width: 56px;
+    height: 56px;
+    background: #d1fae5;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 16px;
+    font-size: 1.5rem;
+  }
+  .form-success h3 {
+    font-family: 'Zen Maru Gothic', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 900;
+    margin-bottom: 8px;
+  }
+  .form-success p {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    line-height: 1.8;
+  }
+  .cta-divider {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 24px 0;
+    color: rgba(255,255,255,0.5);
+    font-size: 0.8rem;
+  }
+  .cta-divider::before,
+  .cta-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(255,255,255,0.2);
+  }
+  .btn-cta-secondary {
+    background: transparent;
+    color: white;
+    border: 2px solid rgba(255,255,255,0.4);
+    padding: 14px 40px;
+    border-radius: 50px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .btn-cta-secondary:hover {
+    background: rgba(255,255,255,0.1);
+    border-color: rgba(255,255,255,0.6);
+  }
+  @media (min-width: 768px) {
+    .form-row {
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .contact-form-card {
+      padding: 40px 36px;
+    }
+  }
+  /* ===== FOOTER ===== */
+  footer {
+    padding: 32px 20px;
+    text-align: center;
+    font-size: 0.75rem;
+    color: var(--text-light);
+    background: var(--white);
+    border-top: 1px solid var(--border);
+  }
+  footer .footer-logo {
+    font-family: 'Zen Maru Gothic', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 900;
+    color: var(--primary);
+    margin-bottom: 12px;
+  }
+  .footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px 24px;
+    margin-bottom: 12px;
+  }
+  .footer-links a {
+    color: var(--text-light);
+    text-decoration: none;
+    font-size: 0.8rem;
+    transition: color 0.3s;
+  }
+  .footer-links a:hover { color: var(--primary); }
+  /* ===== ANIMATIONS ===== */
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.6s ease-out;
+  }
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  /* ===== RESPONSIVE ===== */
+  @media (min-width: 768px) {
+    .hero h1 { font-size: 2.4rem; }
+    .hero-buttons { flex-direction: row; justify-content: center; }
+    .pain-list { max-width: 600px; }
+    .step-cards { max-width: 600px; }
+    .target-grid { grid-template-columns: repeat(4, 1fr); max-width: 700px; }
+    .dashboard-preview { max-width: 550px; }
+  }
+</style>
+</head>
+<body>
+<!-- HEADER -->
+<header>
+  <a href="#" style="text-decoration:none;" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">
+    <div class="logo"><img src="images/logo.png" alt="マトメル" class="logo-img"></div>
+    <span class="logo-sub">売上統合ダッシュボード</span>
+  </a>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <a href="https://app.matomeru.app/login" style="color:var(--text-light);text-decoration:none;font-size:0.85rem;font-weight:500;">ログイン</a>
+    <a href="https://app.matomeru.app/signup" class="header-cta">無料で始める →</a>
+  </div>
+</header>
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-tag">ひとり院長・サロンオーナーのための</div>
+  <h1>月末の売上集計、<br>まだ<span class="highlight">手作業</span>ですか？</h1>
+  <p class="hero-sub">
+    ホットペッパー、EPARK、電話予約、LINE…<br>
+    バラバラの売上を、一つの画面にまとめます。
+  </p>
+  <div class="hero-buttons">
+    <a href="https://app.matomeru.app/signup" class="btn-primary">無料で始める →</a>
+    <a href="#steps" class="btn-secondary">使い方を見る</a>
+  </div>
+  <!-- 動画セクション（動画準備でき次第 style="display:none" を削除し、iframeのsrcにURLを設定） -->
+  <div class="hero-video" style="display:none">
+    <div class="video-wrapper">
+      <iframe src="" title="マトメル紹介動画" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+  </div>
+</section>
+<!-- PAIN POINTS -->
+<section class="pain">
+  <h2>こんなお悩み、<br>ありませんか？</h2>
+  <div class="pain-list">
+    <div class="pain-item fade-in">
+      <div class="pain-icon"><img src="images/icon-scattered.png" alt="売上データがバラバラ"></div>
+      <div class="pain-text">ホットペッパー、EPARK、電話…<br><strong>売上がバラバラ</strong>で全体像が見えない</div>
+    </div>
+    <div class="pain-item fade-in">
+      <div class="pain-icon"><img src="images/icon-time.png" alt="月末の集計に時間がかかる"></div>
+      <div class="pain-text">月末になると<strong>集計に3〜4時間</strong>かかる</div>
+    </div>
+    <div class="pain-item fade-in">
+      <div class="pain-icon"><img src="images/icon-channels.png" alt="チャネルごとの把握ができない"></div>
+      <div class="pain-text">サロンボードとEPARKの管理画面を<br><strong>行ったり来たり</strong>している</div>
+    </div>
+    <div class="pain-item fade-in">
+      <div class="pain-icon"><img src="images/icon-invisible.png" alt="リアルタイムで売上が見えない"></div>
+      <div class="pain-text">どの予約経路が<strong>一番利益が出ているか</strong><br>正直分からない</div>
+    </div>
+  </div>
+</section>
+<!-- SOLUTION -->
+<section class="solution">
+  <div class="solution-tag">✨ マトメルの解決策</div>
+  <h2>全経路の売上が<br>一画面で丸見えに。</h2>
+  <p class="solution-desc">
+    CSVをアップロードするだけ。<br>
+    AIが自動で経路別に分類し、<br>
+    あなたのお店の売上ダッシュボードを作ります。
+  </p>
+  <!-- Dashboard Mock -->
+  <div class="dashboard-preview fade-in">
+    <div class="dash-header">
+      <div class="dash-title">📈 売上サマリー</div>
+      <div class="dash-period">2026年2月</div>
+    </div>
+    <div class="dash-total">
+      <div class="dash-total-label">今月の売上合計</div>
+      <div class="dash-total-number">¥1,248,000</div>
+      <div class="dash-total-change">▲ 12.3% 前月比</div>
+    </div>
+    <div class="dash-bars">
+      <div class="dash-bar-item">
+        <div class="dash-bar-label">🔥 ホットペッパー</div>
+        <div class="dash-bar-track">
+          <div class="dash-bar-fill bar-hp">60%</div>
+        </div>
+        <div class="dash-bar-amount">¥748,800</div>
+      </div>
+      <div class="dash-bar-item">
+        <div class="dash-bar-label">🏥 EPARK</div>
+        <div class="dash-bar-track">
+          <div class="dash-bar-fill bar-epark">22%</div>
+        </div>
+        <div class="dash-bar-amount">¥274,560</div>
+      </div>
+      <div class="dash-bar-item">
+        <div class="dash-bar-label">📞 電話予約</div>
+        <div class="dash-bar-track">
+          <div class="dash-bar-fill bar-tel">12%</div>
+        </div>
+        <div class="dash-bar-amount">¥149,760</div>
+      </div>
+      <div class="dash-bar-item">
+        <div class="dash-bar-label">💬 LINE予約</div>
+        <div class="dash-bar-track">
+          <div class="dash-bar-fill bar-line">6%</div>
+        </div>
+        <div class="dash-bar-amount">¥74,880</div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- STEPS -->
+<section class="steps" id="steps">
+  <div style="text-align:center;">
+    <div class="steps-tag">🔧 使い方</div>
+    <h2>カンタン3ステップ</h2>
+  </div>
+  <div class="step-cards">
+    <div class="step-card fade-in">
+      <img src="images/step1-csv.png" alt="STEP1: CSVダウンロード" class="step-img">
+      <div class="step-label">STEP 1 / UPLOAD</div>
+      <h3>サロンボードやEPARKから<br>CSVをアップロード</h3>
+      <p>各サービスの管理画面からCSVをダウンロードして、マトメルにアップロードするだけ。手順書もご用意しています。</p>
+    </div>
+    <div class="step-card fade-in">
+      <img src="images/step2-upload.png" alt="STEP2: アップロード" class="step-img">
+      <div class="step-label">STEP 2 / AI ANALYZE</div>
+      <h3>AIが自動で<br>経路別に分類・集計</h3>
+      <p>アップロードされたデータをAIが自動解析。予約経路、金額、日付を自動で整理します。手入力は不要です。</p>
+    </div>
+    <div class="step-card fade-in">
+      <img src="images/step3-dashboard.png" alt="STEP3: ダッシュボード表示" class="step-img">
+      <div class="step-label">STEP 3 / DASHBOARD</div>
+      <h3>ダッシュボードで<br>売上が一目で分かる</h3>
+      <p>経路別の売上、前月比、客単価の推移。経営に必要な数字が一画面に。税理士に渡すCSV出力も可能です。</p>
+    </div>
+  </div>
+</section>
+<!-- COMPARISON -->
+<section class="comparison">
+  <h2>今の作業と<br>何が変わる？</h2>
+  <div class="compare-images fade-in">
+    <div class="compare-img-card">
+      <img src="images/before.png" alt="Before: 月末の集計作業に毎月3〜4時間">
+    </div>
+    <div class="compare-img-card">
+      <img src="images/after.png" alt="After: マトメルならたった5分">
+    </div>
+  </div>
+  <div class="compare-table">
+    <div class="compare-row">
+      <div class="compare-cell compare-label"></div>
+      <div class="compare-cell compare-header">今まで</div>
+      <div class="compare-cell compare-header matomeru">マトメル</div>
+    </div>
+    <div class="compare-row">
+      <div class="compare-cell compare-label">月末の集計時間</div>
+      <div class="compare-cell">3〜4時間</div>
+      <div class="compare-cell compare-good">約5分</div>
+    </div>
+    <div class="compare-row">
+      <div class="compare-cell compare-label">経路別の売上</div>
+      <div class="compare-cell">なんとなく</div>
+      <div class="compare-cell compare-good">数字で把握</div>
+    </div>
+    <div class="compare-row">
+      <div class="compare-cell compare-label">前月比較</div>
+      <div class="compare-cell">やってない</div>
+      <div class="compare-cell compare-good">自動表示</div>
+    </div>
+    <div class="compare-row">
+      <div class="compare-cell compare-label">税理士への共有</div>
+      <div class="compare-cell">手書き/Excel</div>
+      <div class="compare-cell compare-good">CSV一発出力</div>
+    </div>
+  </div>
+</section>
+<!-- TARGET -->
+<section class="target">
+  <h2>こんなお店で<br>使われています</h2>
+  <div class="target-grid">
+    <div class="target-item fade-in">
+      <img src="images/industry-seitai.png" alt="整体院" class="target-img">
+      <div class="target-name">整体院</div>
+    </div>
+    <div class="target-item fade-in">
+      <img src="images/industry-biyou.png" alt="美容院" class="target-img">
+      <div class="target-name">美容院</div>
+    </div>
+    <div class="target-item fade-in">
+      <img src="images/industry-nail.png" alt="ネイルサロン" class="target-img">
+      <div class="target-name">ネイルサロン</div>
+    </div>
+    <div class="target-item fade-in">
+      <img src="images/industry-esthe.jpg" alt="エステサロン" class="target-img">
+      <div class="target-name">エステサロン</div>
+    </div>
+  </div>
+</section>
+<!-- PRICING -->
+<section class="pricing" id="pricing">
+  <h2>料金プラン</h2>
+  <p class="pricing-sub">シンプルな月額制。追加費用なし。</p>
+  <div class="price-card">
+    <div class="price-badge">初期費用なし</div>
+    <div class="price-name">スタンダードプラン</div>
+    <div class="price-amount"><span>¥</span>10,000<span>/月（税別）</span></div>
+    <p class="price-period"></p>
+    <div class="price-annual">年額プランなら ¥100,000（2ヶ月分お得）</div>
+    <div class="price-features">
+      <div class="price-feature"><span class="check">✓</span> 売上ダッシュボード</div>
+      <div class="price-feature"><span class="check">✓</span> 経路別売上の自動分類</div>
+      <div class="price-feature"><span class="check">✓</span> 前月比・推移グラフ</div>
+      <div class="price-feature"><span class="check">✓</span> CSV出力（税理士共有用）</div>
+      <div class="price-feature"><span class="check">✓</span> 初期設定サポート付き</div>
+      <div class="price-feature"><span class="check">✓</span> LINEでの質問対応</div>
+    </div>
+    <a href="https://app.matomeru.app/signup" class="btn-primary" style="width:100%;justify-content:center;">無料で始める →</a>
+  </div>
+</section>
+<!-- CTA -->
+<section class="cta" id="cta">
+  <h2>月末の集計作業、<br>もう終わりにしませんか？</h2>
+  <p>アカウント作成は1分。すぐに使い始められます。</p>
+  <a href="https://app.matomeru.app/signup" class="btn-cta">無料で始める →</a>
+  <p class="cta-note">クレジットカード登録不要。いつでも解約OK。</p>
+  <div class="cta-divider">使い方が不安な方は</div>
+  <a href="https://lin.ee/" class="btn-cta-secondary">💬 LINEでサポートを受ける</a>
+</section>
+<!-- CONTACT FORM -->
+<section class="contact-form" id="contact">
+  <h2>お問い合わせ</h2>
+  <p class="contact-form-sub">ご質問・不具合のご報告など、お気軽にどうぞ。</p>
+  <div class="contact-form-card fade-in">
+    <form id="contactForm">
+      <!-- Honeypot for spam prevention -->
+      <input type="text" name="website" style="position:absolute;opacity:0;pointer-events:none;height:0;width:0;" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <div class="form-row">
+        <div class="form-group">
+          <label>店舗名・院名 <span class="required">*</span></label>
+          <input type="text" name="storeName" required maxlength="100" placeholder="例：さくら整体院">
+        </div>
+        <div class="form-group">
+          <label>お名前 <span class="required">*</span></label>
+          <input type="text" name="contactName" required maxlength="50" placeholder="例：山田 太郎">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>メールアドレス <span class="required">*</span></label>
+          <input type="email" name="email" required maxlength="254" placeholder="例：info@example.com">
+        </div>
+        <div class="form-group">
+          <label>電話番号 <span class="optional">(任意)</span></label>
+          <input type="tel" name="phone" maxlength="20" placeholder="例：090-1234-5678">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>ご質問・ご要望 <span class="optional">(任意)</span></label>
+        <textarea name="message" maxlength="1000" placeholder="気になる点や、現在お使いの予約チャネルなどをご記入ください"></textarea>
+      </div>
+      <div class="form-error" id="formError"></div>
+      <button type="submit" class="btn-submit" id="submitBtn">
+        <span id="submitText">送信する →</span>
+      </button>
+      <p class="form-note">※ info@hirovision.jp 宛にメールが送信されます。<br>2営業日以内にご返信いたします。</p>
+    </form>
+    <div class="form-success" id="formSuccess" style="display:none;">
+      <div class="form-success-icon">✅</div>
+      <h3>送信が完了しました</h3>
+      <p>お問い合わせありがとうございます。<br>2営業日以内にご連絡いたします。</p>
+    </div>
+  </div>
+</section>
+<!-- CROSS-SELL: MATAKITE -->
+<section class="cross-sell">
+  <div class="cross-sell-card">
+    <h3>🐢 売上の次は、リピート改善。</h3>
+    <p>売上データが整理できたら、次は「なぜリピートしないか」を可視化しませんか？姉妹サービス「マタキテ」が、お客様の本音と迷いを見える化します。</p>
+    <a href="https://www.matakite.jp" class="btn-matakite">マタキテを見る →</a>
+  </div>
+</section>
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo"><img src="images/logo.png" alt="マトメル" style="height:40px;width:auto;mix-blend-mode:multiply;"></div>
+  <div class="footer-links">
+    <a href="terms.html">利用規約</a>
+    <a href="privacy.html">プライバシーポリシー</a>
+    <a href="commercial-transaction.html">特定商取引法に基づく表記</a>
+    <a href="https://hirovision.jp" target="_blank" rel="noopener noreferrer">運営会社</a>
+  </div>
+  <p>ヒロコーポレーション | © 2026 All rights reserved.</p>
+</footer>
+<!-- Scroll Animation Script -->
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // Contact Form Handler
+  document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    // Honeypot check
+    if (this.website.value) return;
+
+    const storeName = this.storeName.value.trim();
+    const contactName = this.contactName.value.trim();
+    const email = this.email.value.trim();
+    const phone = this.phone.value.trim();
+    const message = this.message.value.trim();
+    const errorEl = document.getElementById('formError');
+    const submitBtn = document.getElementById('submitBtn');
+    const submitText = document.getElementById('submitText');
+
+    // Validation
+    errorEl.classList.remove('show');
+
+    if (!storeName || !contactName || !email) {
+      errorEl.textContent = '必須項目を入力してください。';
+      errorEl.classList.add('show');
+      return;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      errorEl.textContent = '有効なメールアドレスを入力してください。';
+      errorEl.classList.add('show');
+      return;
+    }
+
+    // Compose email
+    const subject = encodeURIComponent('【マトメル】お問い合わせ - ' + storeName);
+    const body = encodeURIComponent(
+      '【お問い合わせ内容】\n\n' +
+      '店舗名・院名：' + storeName + '\n' +
+      'お名前：' + contactName + '\n' +
+      'メールアドレス：' + email + '\n' +
+      (phone ? '電話番号：' + phone + '\n' : '') +
+      '\n' +
+      'ご質問・ご要望：\n' + (message || 'なし') + '\n'
+    );
+
+    // Disable button
+    submitBtn.disabled = true;
+    submitText.textContent = '送信中...';
+
+    // Open mailto
+    window.location.href = 'mailto:info@hirovision.jp?subject=' + subject + '&body=' + body;
+
+    // Show success after a short delay
+    setTimeout(function() {
+      document.getElementById('contactForm').style.display = 'none';
+      document.getElementById('formSuccess').style.display = 'block';
+    }, 500);
+  });
+</script>
+</body>
+</html>

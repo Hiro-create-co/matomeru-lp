@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>特定商取引法に基づく表記｜マトメル</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Zen+Maru+Gothic:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #1a6fb5;
+    --primary-dark: #124d7e;
+    --primary-light: #e8f2fb;
+    --text: #2a2a2a;
+    --text-light: #6b7280;
+    --bg: #fafcfe;
+    --white: #ffffff;
+    --border: #e5e7eb;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    color: var(--text);
+    background: var(--bg);
+    line-height: 1.8;
+    -webkit-font-smoothing: antialiased;
+  }
+  header {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(255,255,255,0.95); backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border); padding: 12px 20px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .logo-link { text-decoration: none; }
+  .logo-img { height: 44px; width: auto; mix-blend-mode: multiply; }
+  .back-btn {
+    color: var(--text-light); text-decoration: none; font-size: 0.85rem;
+    font-weight: 500; display: flex; align-items: center; gap: 4px;
+    transition: color 0.3s;
+  }
+  .back-btn:hover { color: var(--primary); }
+  main { padding: 120px 20px 80px; max-width: 720px; margin: 0 auto; }
+  h1 {
+    font-family: 'Zen Maru Gothic', sans-serif; font-size: 1.8rem;
+    font-weight: 900; text-align: center; margin-bottom: 48px;
+  }
+  table {
+    width: 100%; border-collapse: collapse; margin-bottom: 24px;
+  }
+  table th, table td {
+    padding: 16px 20px; text-align: left; border-bottom: 1px solid var(--border);
+    vertical-align: top; line-height: 1.8;
+  }
+  table th {
+    width: 35%; font-weight: 700; font-size: 0.9rem; color: var(--text);
+    background: var(--primary-light);
+  }
+  table td {
+    font-size: 0.9rem; color: var(--text-light);
+  }
+  table td ul { padding-left: 20px; margin: 0; }
+  table td li { margin-bottom: 4px; }
+  .note {
+    font-size: 0.85rem; color: var(--text-light); background: var(--primary-light);
+    padding: 16px; border-radius: 8px; margin-top: 24px;
+  }
+  footer {
+    padding: 32px 20px; text-align: center; font-size: 0.75rem;
+    color: var(--text-light); background: var(--white);
+    border-top: 1px solid var(--border);
+  }
+  .footer-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 16px 24px; margin-bottom: 12px; }
+  .footer-links a { color: var(--text-light); text-decoration: none; font-size: 0.8rem; transition: color 0.3s; }
+  .footer-links a:hover { color: var(--primary); }
+  @media (max-width: 600px) {
+    table th, table td { display: block; width: 100%; }
+    table th { border-bottom: none; padding-bottom: 4px; }
+    table td { padding-top: 4px; padding-bottom: 16px; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <a href="index.html" class="logo-link"><img src="images/logo.png" alt="マトメル" class="logo-img"></a>
+  <a href="index.html" class="back-btn">&larr; トップに戻る</a>
+</header>
+<main>
+  <h1>特定商取引法に基づく表記</h1>
+
+  <table>
+    <tr>
+      <th>販売事業者</th>
+      <td>ヒロコーポレーション</td>
+    </tr>
+    <tr>
+      <th>代表者</th>
+      <td>山田紘也</td>
+    </tr>
+    <tr>
+      <th>所在地</th>
+      <td>〒107-0052 東京都港区赤坂4丁目8番19号 赤坂フロントタウン3階</td>
+    </tr>
+    <tr>
+      <th>連絡先</th>
+      <td>E-mail：info@hirovision.jp<br>※お問い合わせはメールにてお願いいたします。</td>
+    </tr>
+    <tr>
+      <th>サービス名</th>
+      <td>マトメル（売上統合ダッシュボード）</td>
+    </tr>
+    <tr>
+      <th>サービスURL</th>
+      <td>https://matomeru.app</td>
+    </tr>
+    <tr>
+      <th>販売価格</th>
+      <td>
+        <ul>
+          <li>月額プラン：¥10,000（税別）</li>
+          <li>年額プラン：¥100,000（税別）</li>
+        </ul>
+        ※価格は税別表記です。別途消費税がかかります。
+      </td>
+    </tr>
+    <tr>
+      <th>サービス料金以外に発生する費用</th>
+      <td>インターネット接続に必要な通信費用は利用者の負担となります。</td>
+    </tr>
+    <tr>
+      <th>支払方法</th>
+      <td>クレジットカード決済（Stripe経由）</td>
+    </tr>
+    <tr>
+      <th>支払時期</th>
+      <td>
+        <ul>
+          <li>月額プラン：毎月、契約日と同日に自動決済</li>
+          <li>年額プラン：契約時に一括決済、以降毎年自動更新</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <th>サービス提供時期</th>
+      <td>利用登録完了後、直ちにご利用いただけます。</td>
+    </tr>
+    <tr>
+      <th>解約・キャンセルについて</th>
+      <td>
+        <ul>
+          <li>利用者はいつでも解約手続きを行うことができます。</li>
+          <li>解約後も、当該課金期間の終了時までサービスをご利用いただけます。</li>
+          <li>日割り計算による返金は行いません。</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <th>返品・返金ポリシー</th>
+      <td>デジタルサービスの性質上、サービス提供開始後の返品・返金には対応しておりません。ただし、法令に定めがある場合はこの限りではありません。</td>
+    </tr>
+    <tr>
+      <th>動作環境</th>
+      <td>
+        <ul>
+          <li>Google Chrome、Safari、Microsoft Edge、Firefox の最新版</li>
+          <li>インターネット接続環境が必要です</li>
+        </ul>
+      </td>
+    </tr>
+  </table>
+
+  <div class="note">
+    ※上記内容は、法令の改正等に伴い予告なく変更する場合がございます。
+  </div>
+</main>
+<footer>
+  <div class="footer-links">
+    <a href="index.html">トップ</a>
+    <a href="terms.html">利用規約</a>
+    <a href="privacy.html">プライバシーポリシー</a>
+    <a href="commercial-transaction.html">特定商取引法に基づく表記</a>
+    <a href="https://hirovision.jp" target="_blank" rel="noopener noreferrer">運営会社</a>
+  </div>
+  <p>ヒロコーポレーション | &copy; 2026 All rights reserved.</p>
+</footer>
+</body>
+</html>
