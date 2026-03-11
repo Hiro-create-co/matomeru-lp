@@ -27,6 +27,39 @@
 <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
 <!-- Canonical -->
 <link rel="canonical" href="https://matomeru-lp.vercel.app/">
+<!-- JSON-LD 構造化データ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "マトメル",
+  "description": "ホットペッパー、EPARK、電話予約、LINE…バラバラの売上を一つのダッシュボードに集約する売上統合ダッシュボード。",
+  "url": "https://matomeru-lp.vercel.app/",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Web",
+  "offers": [
+    {
+      "@type": "Offer",
+      "name": "月額プラン",
+      "price": "2980",
+      "priceCurrency": "JPY",
+      "billingDuration": "P1M"
+    },
+    {
+      "@type": "Offer",
+      "name": "年額プラン",
+      "price": "29800",
+      "priceCurrency": "JPY",
+      "billingDuration": "P1Y"
+    }
+  ],
+  "provider": {
+    "@type": "Organization",
+    "name": "ヒロコーポレーション",
+    "url": "https://hirovision.jp"
+  }
+}
+</script>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Zen+Maru+Gothic:wght@400;500;700;900&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -52,6 +85,7 @@
     background: var(--bg);
     line-height: 1.8;
     -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
   }
   /* ===== HEADER ===== */
   header {
@@ -169,12 +203,12 @@
     align-items: center;
     gap: 8px;
     text-decoration: none;
-    box-shadow: 0 4px 16px rgba(26,111,181,0.3);
+    box-shadow: 0 4px 16px rgba(232,164,110,0.3);
   }
   .btn-primary:hover {
     background: var(--primary-dark);
     transform: translateY(-2px);
-    box-shadow: 0 6px 24px rgba(26,111,181,0.4);
+    box-shadow: 0 6px 24px rgba(232,164,110,0.4);
   }
   .btn-secondary {
     background: transparent;
@@ -452,28 +486,6 @@
     height: auto;
     border-radius: 12px;
     margin-bottom: 16px;
-  }
-  /* ===== HERO VIDEO ===== */
-  .hero-video {
-    max-width: 640px;
-    width: 100%;
-    margin: 36px auto 0;
-    animation: fadeInUp 0.6s ease-out 0.4s both;
-  }
-  .video-wrapper {
-    position: relative;
-    padding-bottom: 56.25%;
-    height: 0;
-    overflow: hidden;
-    border-radius: 16px;
-    box-shadow: 0 4px 24px rgba(0,0,0,0.1);
-  }
-  .video-wrapper iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
   }
   /* ===== COMPARISON IMAGES ===== */
   .compare-images {
@@ -850,7 +862,7 @@
   .form-group input:focus,
   .form-group textarea:focus {
     border-color: var(--primary);
-    box-shadow: 0 0 0 3px rgba(26,111,181,0.1);
+    box-shadow: 0 0 0 3px rgba(232,164,110,0.1);
   }
   .form-group input::placeholder,
   .form-group textarea::placeholder {
@@ -894,12 +906,12 @@
     align-items: center;
     justify-content: center;
     gap: 8px;
-    box-shadow: 0 4px 16px rgba(26,111,181,0.3);
+    box-shadow: 0 4px 16px rgba(232,164,110,0.3);
   }
   .btn-submit:hover {
     background: var(--primary-dark);
     transform: translateY(-1px);
-    box-shadow: 0 6px 24px rgba(26,111,181,0.4);
+    box-shadow: 0 6px 24px rgba(232,164,110,0.4);
   }
   .btn-submit:disabled {
     opacity: 0.6;
@@ -1194,19 +1206,19 @@
   <h2 class="fade-in">こんなお悩み、<br>ありませんか？</h2>
   <div class="pain-list">
     <div class="pain-item fade-in-left stagger-1">
-      <div class="pain-icon"><img src="images/icon-scattered.png" alt="売上データがバラバラ"></div>
+      <div class="pain-icon"><img src="images/icon-scattered.png" alt="売上データがバラバラ" loading="lazy"></div>
       <div class="pain-text">ホットペッパー、EPARK、電話…<br><strong>売上がバラバラ</strong>で全体像が見えない</div>
     </div>
     <div class="pain-item fade-in-right stagger-2">
-      <div class="pain-icon"><img src="images/icon-time.png" alt="月末の集計に時間がかかる"></div>
+      <div class="pain-icon"><img src="images/icon-time.png" alt="月末の集計に時間がかかる" loading="lazy"></div>
       <div class="pain-text">月末になると<strong>集計に3〜4時間</strong>かかる</div>
     </div>
     <div class="pain-item fade-in-left stagger-3">
-      <div class="pain-icon"><img src="images/icon-channels.png" alt="チャネルごとの把握ができない"></div>
+      <div class="pain-icon"><img src="images/icon-channels.png" alt="チャネルごとの把握ができない" loading="lazy"></div>
       <div class="pain-text">サロンボードとEPARKの管理画面を<br><strong>行ったり来たり</strong>している</div>
     </div>
     <div class="pain-item fade-in-right stagger-4">
-      <div class="pain-icon"><img src="images/icon-invisible.png" alt="リアルタイムで売上が見えない"></div>
+      <div class="pain-icon"><img src="images/icon-invisible.png" alt="リアルタイムで売上が見えない" loading="lazy"></div>
       <div class="pain-text">どの予約経路が<strong>一番利益が出ているか</strong><br>正直分からない</div>
     </div>
   </div>
@@ -1274,19 +1286,19 @@
   </div>
   <div class="step-cards">
     <div class="step-card fade-in-left stagger-1">
-      <img src="images/step1-csv.png" alt="STEP1: CSVダウンロード" class="step-img">
+      <img src="images/step1-csv.png" alt="STEP1: CSVダウンロード" class="step-img" loading="lazy">
       <div class="step-label">STEP 1 / UPLOAD</div>
       <h3>サロンボードやEPARKから<br>CSVをアップロード</h3>
       <p>各サービスの管理画面からCSVをダウンロードして、マトメルにアップロードするだけ。手順書もご用意しています。</p>
     </div>
     <div class="step-card fade-in-right stagger-2">
-      <img src="images/step2-upload.png" alt="STEP2: アップロード" class="step-img">
+      <img src="images/step2-upload.png" alt="STEP2: アップロード" class="step-img" loading="lazy">
       <div class="step-label">STEP 2 / AI ANALYZE</div>
       <h3>AIが自動で<br>経路別に分類・集計</h3>
       <p>アップロードされたデータをAIが自動解析。予約経路、金額、日付を自動で整理します。手入力は不要です。</p>
     </div>
     <div class="step-card fade-in-left stagger-3">
-      <img src="images/step3-dashboard.png" alt="STEP3: ダッシュボード表示" class="step-img">
+      <img src="images/step3-dashboard.png" alt="STEP3: ダッシュボード表示" class="step-img" loading="lazy">
       <div class="step-label">STEP 3 / DASHBOARD</div>
       <h3>ダッシュボードで<br>売上が一目で分かる</h3>
       <p>経路別の売上、前月比、客単価の推移。経営に必要な数字が一画面に。税理士に渡すCSV出力も可能です。</p>
@@ -1298,10 +1310,10 @@
   <h2 class="fade-in">今の作業と<br>何が変わる？</h2>
   <div class="compare-images fade-in">
     <div class="compare-img-card">
-      <img src="images/before.png" alt="Before: 月末の集計作業に毎月3〜4時間">
+      <img src="images/before.png" alt="Before: 月末の集計作業に毎月3〜4時間" loading="lazy">
     </div>
     <div class="compare-img-card">
-      <img src="images/after.png" alt="After: マトメルならたった5分">
+      <img src="images/after.png" alt="After: マトメルならたった5分" loading="lazy">
     </div>
   </div>
   <div class="compare-table scale-in">
@@ -1337,19 +1349,19 @@
   <h2 class="fade-in">こんなお店で<br>使われています</h2>
   <div class="target-grid">
     <div class="target-item scale-in stagger-1">
-      <img src="images/industry-seitai.png" alt="整体院" class="target-img">
+      <img src="images/industry-seitai.png" alt="整体院" class="target-img" loading="lazy">
       <div class="target-name">整体院</div>
     </div>
     <div class="target-item scale-in stagger-2">
-      <img src="images/industry-biyou.png" alt="美容院" class="target-img">
+      <img src="images/industry-biyou.png" alt="美容院" class="target-img" loading="lazy">
       <div class="target-name">美容院</div>
     </div>
     <div class="target-item scale-in stagger-3">
-      <img src="images/industry-nail.png" alt="ネイルサロン" class="target-img">
+      <img src="images/industry-nail.png" alt="ネイルサロン" class="target-img" loading="lazy">
       <div class="target-name">ネイルサロン</div>
     </div>
     <div class="target-item scale-in stagger-4">
-      <img src="images/industry-esthe.jpg" alt="エステサロン" class="target-img">
+      <img src="images/industry-esthe.jpg" alt="エステサロン" class="target-img" loading="lazy">
       <div class="target-name">エステサロン</div>
     </div>
   </div>
@@ -1448,7 +1460,7 @@
 <!-- CROSS-SELL: MATAKITE -->
 <section class="cross-sell">
   <div class="cross-sell-card fade-in">
-    <img src="images/matakite-reception.jpg" alt="マタキテ QRコードをサロン受付に設置" style="width:100%;border-radius:12px;margin-bottom:20px;">
+    <img src="images/matakite-reception.jpg" alt="マタキテ QRコードをサロン受付に設置" style="width:100%;border-radius:12px;margin-bottom:20px;" loading="lazy">
     <h3>🐢 売上の次は、リピート改善。</h3>
     <p>売上データが整理できたら、次は「なぜリピートしないか」を可視化しませんか？姉妹サービス「マタキテ」が、お客様の本音と迷いを見える化します。</p>
     <a href="https://www.matakite.jp" class="btn-matakite">マタキテを見る →</a>
