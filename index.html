@@ -1029,6 +1029,96 @@
     opacity: 1;
     transform: translateY(0);
   }
+  /* ===== ENHANCED SCROLL ANIMATIONS ===== */
+  .fade-in-left {
+    opacity: 0;
+    transform: translateX(-50px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  }
+  .fade-in-left.visible { opacity: 1; transform: translateX(0); }
+  .fade-in-right {
+    opacity: 0;
+    transform: translateX(50px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  }
+  .fade-in-right.visible { opacity: 1; transform: translateX(0); }
+  .scale-in {
+    opacity: 0;
+    transform: scale(0.88);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  }
+  .scale-in.visible { opacity: 1; transform: scale(1); }
+  .stagger-1 { transition-delay: 0.1s !important; }
+  .stagger-2 { transition-delay: 0.2s !important; }
+  .stagger-3 { transition-delay: 0.3s !important; }
+  .stagger-4 { transition-delay: 0.4s !important; }
+  /* ===== FLOATING BACKGROUND ORBS ===== */
+  .floating-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    pointer-events: none;
+    z-index: 0;
+  }
+  @keyframes float1 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(40px, -30px) scale(1.05); }
+    66% { transform: translate(-20px, 20px) scale(0.97); }
+  }
+  @keyframes float2 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(-30px, 25px) scale(1.03); }
+    66% { transform: translate(25px, -15px) scale(0.95); }
+  }
+  @keyframes float3 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(20px, 35px) scale(0.96); }
+    66% { transform: translate(-35px, -20px) scale(1.04); }
+  }
+  /* ===== PAIN SECTION GRADIENT ANIMATION ===== */
+  .pain {
+    background: linear-gradient(135deg, var(--bg-warm) 0%, #f0e8df 50%, var(--bg-warm) 100%);
+    background-size: 200% 200%;
+    animation: subtleGradient 12s ease-in-out infinite;
+  }
+  @keyframes subtleGradient {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+  /* ===== VIDEO SECTION ===== */
+  .video-section {
+    padding: 0 20px 80px;
+    text-align: center;
+    background: linear-gradient(180deg, var(--bg) 0%, var(--bg-warm) 100%);
+  }
+  .video-section h2 {
+    font-family: 'Zen Maru Gothic', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 900;
+    margin-bottom: 24px;
+    color: var(--text);
+  }
+  .video-section .video-container {
+    max-width: 680px;
+    margin: 0 auto;
+  }
+  .video-section .video-wrapper {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    border-radius: 20px;
+    box-shadow: var(--shadow-lg);
+    background: #1a1a2e;
+  }
+  .video-section .video-wrapper iframe {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    border: 0;
+  }
+  /* ===== SOLUTION FLOATING ORBS ===== */
+  .solution { position: relative; overflow: hidden; }
   /* ===== RESPONSIVE ===== */
   @media (min-width: 768px) {
     .hero { padding: 160px 20px 100px; }
@@ -1056,6 +1146,8 @@
     .contact-form { padding: 100px 20px; }
     .contact-form h2 { font-size: 2.4rem; }
     .dashboard-preview { max-width: 550px; }
+    .video-section { padding: 0 20px 100px; }
+    .video-section h2 { font-size: 2rem; }
   }
 </style>
 </head>
@@ -1073,6 +1165,10 @@
 </header>
 <!-- HERO -->
 <section class="hero">
+  <!-- Floating Background Orbs -->
+  <div class="floating-orb" style="width:350px;height:350px;background:rgba(232,164,110,0.12);top:-100px;right:-100px;animation:float1 25s ease-in-out infinite;"></div>
+  <div class="floating-orb" style="width:250px;height:250px;background:rgba(26,111,181,0.07);bottom:-80px;left:-60px;animation:float2 20s ease-in-out infinite;"></div>
+  <div class="floating-orb" style="width:180px;height:180px;background:rgba(232,164,110,0.08);top:35%;left:65%;animation:float3 30s ease-in-out infinite;"></div>
   <div class="hero-tag">ひとり院長・サロンオーナーのための</div>
   <h1>月末の売上集計、<br>まだ<span class="highlight">手作業</span>ですか？</h1>
   <p class="hero-sub">
@@ -1083,30 +1179,33 @@
     <a href="https://matomeru-app.vercel.app/signup" class="btn-primary">無料で始める →</a>
     <a href="#steps" class="btn-secondary">使い方を見る</a>
   </div>
-  <!-- 動画セクション（動画準備でき次第 style="display:none" を削除し、iframeのsrcにURLを設定） -->
-  <div class="hero-video" style="display:none">
+</section>
+<!-- VIDEO SECTION（操作動画準備でき次第 style="display:none" を削除し、iframeのsrcに動画URLを設定） -->
+<section class="video-section" style="display:none">
+  <h2>30秒でわかるマトメル</h2>
+  <div class="video-container">
     <div class="video-wrapper">
-      <iframe src="" title="マトメル紹介動画" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <iframe src="" title="マトメル操作動画" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </div>
   </div>
 </section>
 <!-- PAIN POINTS -->
 <section class="pain">
-  <h2>こんなお悩み、<br>ありませんか？</h2>
+  <h2 class="fade-in">こんなお悩み、<br>ありませんか？</h2>
   <div class="pain-list">
-    <div class="pain-item fade-in">
+    <div class="pain-item fade-in-left stagger-1">
       <div class="pain-icon"><img src="images/icon-scattered.png" alt="売上データがバラバラ"></div>
       <div class="pain-text">ホットペッパー、EPARK、電話…<br><strong>売上がバラバラ</strong>で全体像が見えない</div>
     </div>
-    <div class="pain-item fade-in">
+    <div class="pain-item fade-in-right stagger-2">
       <div class="pain-icon"><img src="images/icon-time.png" alt="月末の集計に時間がかかる"></div>
       <div class="pain-text">月末になると<strong>集計に3〜4時間</strong>かかる</div>
     </div>
-    <div class="pain-item fade-in">
+    <div class="pain-item fade-in-left stagger-3">
       <div class="pain-icon"><img src="images/icon-channels.png" alt="チャネルごとの把握ができない"></div>
       <div class="pain-text">サロンボードとEPARKの管理画面を<br><strong>行ったり来たり</strong>している</div>
     </div>
-    <div class="pain-item fade-in">
+    <div class="pain-item fade-in-right stagger-4">
       <div class="pain-icon"><img src="images/icon-invisible.png" alt="リアルタイムで売上が見えない"></div>
       <div class="pain-text">どの予約経路が<strong>一番利益が出ているか</strong><br>正直分からない</div>
     </div>
@@ -1114,15 +1213,18 @@
 </section>
 <!-- SOLUTION -->
 <section class="solution">
-  <div class="solution-tag">✨ マトメルの解決策</div>
-  <h2>全経路の売上が<br>一画面で丸見えに。</h2>
-  <p class="solution-desc">
+  <!-- Floating Orbs -->
+  <div class="floating-orb" style="width:280px;height:280px;background:rgba(26,111,181,0.06);top:-60px;left:-80px;animation:float2 22s ease-in-out infinite;"></div>
+  <div class="floating-orb" style="width:200px;height:200px;background:rgba(232,164,110,0.06);bottom:-40px;right:-60px;animation:float1 28s ease-in-out infinite;"></div>
+  <div class="solution-tag fade-in">✨ マトメルの解決策</div>
+  <h2 class="fade-in">全経路の売上が<br>一画面で丸見えに。</h2>
+  <p class="solution-desc fade-in">
     CSVをアップロードするだけ。<br>
     AIが自動で経路別に分類し、<br>
     あなたのお店の売上ダッシュボードを作ります。
   </p>
   <!-- Dashboard Mock -->
-  <div class="dashboard-preview fade-in">
+  <div class="dashboard-preview scale-in">
     <div class="dash-header">
       <div class="dash-title">📈 売上サマリー</div>
       <div class="dash-period">2026年2月</div>
@@ -1171,19 +1273,19 @@
     <h2>カンタン3ステップ</h2>
   </div>
   <div class="step-cards">
-    <div class="step-card fade-in">
+    <div class="step-card fade-in-left stagger-1">
       <img src="images/step1-csv.png" alt="STEP1: CSVダウンロード" class="step-img">
       <div class="step-label">STEP 1 / UPLOAD</div>
       <h3>サロンボードやEPARKから<br>CSVをアップロード</h3>
       <p>各サービスの管理画面からCSVをダウンロードして、マトメルにアップロードするだけ。手順書もご用意しています。</p>
     </div>
-    <div class="step-card fade-in">
+    <div class="step-card fade-in-right stagger-2">
       <img src="images/step2-upload.png" alt="STEP2: アップロード" class="step-img">
       <div class="step-label">STEP 2 / AI ANALYZE</div>
       <h3>AIが自動で<br>経路別に分類・集計</h3>
       <p>アップロードされたデータをAIが自動解析。予約経路、金額、日付を自動で整理します。手入力は不要です。</p>
     </div>
-    <div class="step-card fade-in">
+    <div class="step-card fade-in-left stagger-3">
       <img src="images/step3-dashboard.png" alt="STEP3: ダッシュボード表示" class="step-img">
       <div class="step-label">STEP 3 / DASHBOARD</div>
       <h3>ダッシュボードで<br>売上が一目で分かる</h3>
@@ -1193,7 +1295,7 @@
 </section>
 <!-- COMPARISON -->
 <section class="comparison">
-  <h2>今の作業と<br>何が変わる？</h2>
+  <h2 class="fade-in">今の作業と<br>何が変わる？</h2>
   <div class="compare-images fade-in">
     <div class="compare-img-card">
       <img src="images/before.png" alt="Before: 月末の集計作業に毎月3〜4時間">
@@ -1202,7 +1304,7 @@
       <img src="images/after.png" alt="After: マトメルならたった5分">
     </div>
   </div>
-  <div class="compare-table">
+  <div class="compare-table scale-in">
     <div class="compare-row">
       <div class="compare-cell compare-label"></div>
       <div class="compare-cell compare-header">今まで</div>
@@ -1232,21 +1334,21 @@
 </section>
 <!-- TARGET -->
 <section class="target">
-  <h2>こんなお店で<br>使われています</h2>
+  <h2 class="fade-in">こんなお店で<br>使われています</h2>
   <div class="target-grid">
-    <div class="target-item fade-in">
+    <div class="target-item scale-in stagger-1">
       <img src="images/industry-seitai.png" alt="整体院" class="target-img">
       <div class="target-name">整体院</div>
     </div>
-    <div class="target-item fade-in">
+    <div class="target-item scale-in stagger-2">
       <img src="images/industry-biyou.png" alt="美容院" class="target-img">
       <div class="target-name">美容院</div>
     </div>
-    <div class="target-item fade-in">
+    <div class="target-item scale-in stagger-3">
       <img src="images/industry-nail.png" alt="ネイルサロン" class="target-img">
       <div class="target-name">ネイルサロン</div>
     </div>
-    <div class="target-item fade-in">
+    <div class="target-item scale-in stagger-4">
       <img src="images/industry-esthe.jpg" alt="エステサロン" class="target-img">
       <div class="target-name">エステサロン</div>
     </div>
@@ -1254,10 +1356,10 @@
 </section>
 <!-- PRICING -->
 <section class="pricing" id="pricing">
-  <h2>料金プラン</h2>
-  <p class="pricing-sub">シンプルな月額制。追加費用なし。</p>
+  <h2 class="fade-in">料金プラン</h2>
+  <p class="pricing-sub fade-in">シンプルな月額制。追加費用なし。</p>
   <div class="price-cards">
-    <div class="price-card">
+    <div class="price-card fade-in-left">
       <div class="price-badge">初期費用なし</div>
       <div class="price-name">月額プラン</div>
       <div class="price-amount"><span>¥</span>2,980<span>/月（税別）</span></div>
@@ -1272,7 +1374,7 @@
       </div>
       <a href="https://matomeru-app.vercel.app/signup" class="btn-primary" style="width:100%;justify-content:center;">無料で始める →</a>
     </div>
-    <div class="price-card recommended">
+    <div class="price-card recommended fade-in-right">
       <div class="price-badge">おすすめ</div>
       <div class="price-name">年額プラン</div>
       <div class="price-amount"><span>¥</span>29,800<span>/年（税別）</span></div>
@@ -1291,7 +1393,7 @@
 </section>
 <!-- CTA -->
 <section class="cta" id="cta">
-  <h2>月末の集計作業、<br>もう終わりにしませんか？</h2>
+  <h2 class="fade-in">月末の集計作業、<br>もう終わりにしませんか？</h2>
   <p>アカウント作成は1分。すぐに使い始められます。</p>
   <a href="https://matomeru-app.vercel.app/signup" class="btn-cta">無料で始める →</a>
   <p class="cta-note">クレジットカード登録不要。いつでも解約OK。</p>
@@ -1345,7 +1447,7 @@
 </section>
 <!-- CROSS-SELL: MATAKITE -->
 <section class="cross-sell">
-  <div class="cross-sell-card">
+  <div class="cross-sell-card fade-in">
     <img src="images/matakite-reception.jpg" alt="マタキテ QRコードをサロン受付に設置" style="width:100%;border-radius:12px;margin-bottom:20px;">
     <h3>🐢 売上の次は、リピート改善。</h3>
     <p>売上データが整理できたら、次は「なぜリピートしないか」を可視化しませんか？姉妹サービス「マタキテ」が、お客様の本音と迷いを見える化します。</p>
@@ -1372,7 +1474,7 @@
       }
     });
   }, { threshold: 0.1 });
-  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  document.querySelectorAll('.fade-in, .fade-in-left, .fade-in-right, .scale-in').forEach(el => observer.observe(el));
 
   // Contact Form Handler
   document.getElementById('contactForm').addEventListener('submit', function(e) {
